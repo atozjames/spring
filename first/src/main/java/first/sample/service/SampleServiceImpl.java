@@ -1,13 +1,18 @@
 package first.sample.service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import first.sample.dao.SampleDAO;
 
@@ -39,12 +44,7 @@ public class SampleServiceImpl implements SampleService{
 
 
     //게시판 등록
-	@Override
-	public void insertBoard(Map<String, Object> map) throws Exception{
-		// TODO Auto-generated method stub
 	
-		sampleDAO.insertBoard(map);
-	}
 
 
     //게시글 내용 가져 오기
@@ -76,6 +76,31 @@ public class SampleServiceImpl implements SampleService{
 		
 		sampleDAO.delete("sample.deleteBoard", map);
 		
+	}
+
+
+
+	@Override
+	public void insertBoard(Map<String, Object> map, HttpServletRequest request)  throws Exception{
+		// TODO Auto-generated method stub
+		sampleDAO.insertBoard(map);
+	     
+	    MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	    MultipartFile multipartFile = null;
+	    while(iterator.hasNext()){
+	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	        if(multipartFile.isEmpty() == false){
+	            log.debug("------------- file start -------------");
+	            log.debug("name : "+multipartFile.getName());
+	            log.debug("filename : "+multipartFile.getOriginalFilename());
+	            log.debug("size : "+multipartFile.getSize());
+	            log.debug("-------------- file end --------------\n");
+	        }
+	    }
+
+
+	
 	}
 
 	

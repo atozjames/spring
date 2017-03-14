@@ -6,9 +6,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,11 +66,11 @@ public class SampleController {
 
 
  @RequestMapping(value="/sample/insertBoard.do")
- public ModelAndView insertBoard(CommandMap commandMap) throws Exception{
+ public ModelAndView insertBoard(CommandMap commandMap,HttpServletRequest request) throws Exception{
      ModelAndView mv = new ModelAndView("redirect:/sample/openBoardList.do");
       
    
-      
+    /*  
      if(commandMap.isEmpty() == false){
          Iterator<Entry<String,Object>> iterator = commandMap.getMap().entrySet().iterator();
          Entry<String,Object> entry = null;
@@ -77,8 +79,8 @@ public class SampleController {
              log.debug("key : "+entry.getKey()+", value : "+entry.getValue());
          }
      }
-   
-      sampleService.insertBoard(commandMap.getMap());
+   */
+      sampleService.insertBoard(commandMap.getMap(),request);
      
      return mv;
  }
