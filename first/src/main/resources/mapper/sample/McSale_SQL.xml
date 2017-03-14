@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="mcsale">
+
+	<select id="selectCustomList" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+           select  ROWNUM NUM,CID ,C_NAME ,C_LOCAL ,GRADE ,PEOPLE1,PEOPLE2 ,
+           PEOPLE3 ,PEOPLE4 ,EMPOLYEE ,TO_CHAR(AGRR_DATE,'YYYY-MM-DD') AS AGRR_DATE,AGR_COST ,
+           CHECKUP_AMT,SA_WON,CONDITION,MEMO  from customer order by NUM
+        ]]>
+    </select>
+
+     
+</mapper>
