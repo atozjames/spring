@@ -46,5 +46,37 @@ public class SampleServiceImpl implements SampleService{
 		sampleDAO.insertBoard(map);
 	}
 
+
+    //게시글 내용 가져 오기
+	@Override
+	public Map<String, Object> selectBoardDetail(Map<String, Object> map) {
+		
+   		    //카운트 숫자 업데이트
+			sampleDAO.updateHitCnt(map);
+		
+   		    Map<String, Object> resultMap = sampleDAO.selectBoardDetail(map);
+		    return resultMap;
+
+	}
+
+
+
+	@Override
+	public void updateBoard(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		
+		sampleDAO.update("sample.updateBoard", map);
+		
+	}
+
+
+
+	@Override
+	public void deleteBoard(Map<String, Object> map) {
+		
+		sampleDAO.delete("sample.deleteBoard", map);
+		
+	}
+
 	
 }
